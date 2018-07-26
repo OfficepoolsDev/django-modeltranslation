@@ -223,8 +223,8 @@ class MultilingualQuerySet(models.query.QuerySet):
     # This method was not present in django-linguo
     if NEW_RELATED_API:
         def _clone(self, klass=None, **kwargs):
-            kwargs.setdefault('_rewrite', self._rewrite)
-            kwargs.setdefault('_populate', self._populate)
+            # kwargs.setdefault('_rewrite', self._rewrite)
+            # kwargs.setdefault('_populate', self._populate)
             if hasattr(self, 'translation_fields'):
                 kwargs.setdefault('translation_fields', self.translation_fields)
             if hasattr(self, 'fields_to_del'):
@@ -252,14 +252,14 @@ class MultilingualQuerySet(models.query.QuerySet):
 
     # This method was not present in django-linguo
     def rewrite(self, mode=True):
-        return self._clone(_rewrite=mode)
+        return self._clone()
 
     # This method was not present in django-linguo
     def populate(self, mode='all'):
         """
         Overrides the translation fields population mode for this query set.
         """
-        return self._clone(_populate=mode)
+        return self._clone()
 
     def _rewrite_applied_operations(self):
         """
